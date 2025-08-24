@@ -37,6 +37,5 @@ app.use("/api/v1/healthcheck", healthcheckRouter);
 app.use("/api/v1/playlist", playlistRouter);
 app.use("/api/v1/dashboard", dashboardRouter);
 
-app.use("/api/v1/users", userRouter)
 
 export {app};
