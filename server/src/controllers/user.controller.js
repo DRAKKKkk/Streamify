@@ -267,6 +267,47 @@ const updateUserDetails = asyncHandler(async(req, res) => {
         )
 });
 
+const updateUserAvatar = asyncHandler(async(req, res) => {
+    const avatarLocalPath = req.file?.path;
+
+    if (!avatarLocalPath) {
+        throw new ApiError(400, "Avatar file is missing");
+    }
+
+    const avatar = await uploadOnCloudinary(avatarLocalPath);
+
+    if (!avatar.url) {
+        throw new ApiError(400, "Error while uploading avatar");
+    }
+
+    const user = await User.findById(req.user._id).select("avatar");
+
+    const avatarToDelete = user.avatar.public_id;
+
+    const updatedUser = await User.findByIdAndUpdate(
+        req.user?._id,
+        {
+            $set: {
+                avatar: {
+                    public_id: avatar.public_id,
+                    url: avatar.secure_url
+                }
+            }
+        },
+        { new: true }
+    ).select("-password");
+
+    if (avatarToDelete && updatedUser.avatar.public_id) {
+        await deleteOnCloudinary(avatarToDelete);
+    }
+
+    return res
+        .status(200)
+        .json(
+            new ApiResponse(200, updatedUser, "Avatar update successfull")
+        )
+});
+
 const updateUserCoverImage = asyncHandler(async(req, res) => {
     const coverImageLocalPath = req.file?.path;
 
@@ -447,6 +488,7 @@ export {
     changeCurrentPassword,
     getCurrentUser,
     updateUserDetails,
+    updateUserAvatar,
     updateUserCoverImage,
     getUserChannelProfile,
     getWatchHistory
