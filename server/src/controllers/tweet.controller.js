@@ -1,4 +1,4 @@
-import asyncHandler from "../utils/asyncHandler.js";
+import asyncHandler from "../utils/AsyncHandler.js";
 import ApiError from "../utils/apiError.js";
 import { Tweet } from "../models/tweet.model.js";
 import ApiResponse from "../utils/ApiResponse.js";
