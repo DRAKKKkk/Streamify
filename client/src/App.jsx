@@ -12,6 +12,10 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         
         <Route path="" element={<HomePage />} />
+        
+        <Route path="/channel/:username" element={<Channel />} />
+        <Route path="/watch/:videoId" element={<VideoDetail />} />
+
 
       </Route>
     </Routes>
