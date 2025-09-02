@@ -16,6 +16,9 @@ function App() {
         <Route path="/channel/:username" element={<Channel />} />
         <Route path="/watch/:videoId" element={<VideoDetail />} />
 
+        
+        <Route path="/collections" element={<AdminDashboard />} />
+
 
       </Route>
     </Routes>
