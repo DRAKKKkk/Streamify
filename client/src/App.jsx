@@ -10,16 +10,13 @@ function App() {
         {/* More routes will be added here */}
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        
         <Route path="" element={<HomePage />} />
-        
         <Route path="/channel/:username" element={<Channel />} />
         <Route path="/watch/:videoId" element={<VideoDetail />} />
-
-        
         <Route path="/collections" element={<AdminDashboard />} />
-
-
+        <Route path="/history" element={<History />} />
+        <Route path="/liked-videos" element={<LikedVideos />} />
+        <Route path="/subscriptions" element={<MySubscriptions />} />
       </Route>
     </Routes>
   );
